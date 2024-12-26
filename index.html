@@ -72,7 +72,7 @@
             }
 
             .display-4 {
-                font-size: 2.5rem;
+                font-size: 1.5rem;
             }
 
             .lead {
@@ -91,33 +91,56 @@
                 padding-left: 15px;
             }
         }
+
+        .bg-opacity-50 {
+    --bs-bg-opacity: 0.2 !important;
+}
     </style>
 </head>
 <body>
+   
+
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand text-primary d-flex align-items-center" href="#">
-                <i class="fas fa-heartbeat fs-3 me-2"></i>
-                <span class="fw-bold">HealthCare</span>
-            </a>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="navbar">
+    <div class="container">
+        <a class="navbar-brand text-primary d-flex align-items-center" href="#">
+            <i class="fas fa-heartbeat fs-3 me-2"></i>
+            <span class="fw-bold">HealthCare</span>
+        </a>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto text-center">
-                    <li class="nav-item"><a class="nav-link px-3" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#testimonials">Testimonials</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#blog">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
-                </ul>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto text-center">
+                <li class="nav-item"><a class="nav-link px-3" style="color: #0d6efd;" href="#home"><b>Home</b></a></li>
+                <li class="nav-item"><a class="nav-link px-3" style="color: #0d6efd;" href="#about"><b>About</b></a></li>
+                <li class="nav-item"><a class="nav-link px-3" style="color: #0d6efd;" href="#products"><b>Products</b></a></li>
+                <li class="nav-item"><a class="nav-link px-3" style="color: #0d6efd;" href="#services"><b>Services</b></a></li>
+                <li class="nav-item"><a class="nav-link px-3" style="color: #0d6efd;" href="#testimonials"><b>Testimonials</b></a></li>
+                <li class="nav-item"><a class="nav-link px-3" style="color: #0d6efd;" href="#blog"><b>Blog</b></a></li>
+                <li class="nav-item"><a class="nav-link px-3" style="color: #0d6efd;" href="#contact"><b>Contact</b></a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
+<!-- Add custom CSS below -->
+<style>
+    /* Default navbar background color for large screens */
+    #navbar {
+        background-color: white !important;
+    }
+
+    /* Change the navbar background color to white on mobile screens */
+    @media (max-width: 768px) {
+        #navbar {
+            background-color: white !important;
+        }
+    }
+</style>
+
 
   <!-- Hero Section -->
 <div id="heroSlider" class="carousel slide" data-bs-ride="carousel">
