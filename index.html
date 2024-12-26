@@ -24,106 +24,82 @@
 
     <body>
 
-        <!-- Navbar -->
-        <nav
-            class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+      
+         <!-- Navbar with responsive classes -->
+         <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm py-3">
             <div class="container">
-                <!-- Brand and Icon -->
-                <a class="navbar-brand text-primary d-flex align-items-center"
-                    href="#">
+                <a class="navbar-brand text-primary d-flex align-items-center" href="#">
                     <i class="fas fa-heartbeat fs-3 me-2"></i>
                     <span class="fw-bold">HealthCare</span>
                 </a>
 
-                <!-- Toggle Button -->
-                <button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Navbar Links -->
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link"
-                                href="#home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="#testimonials">Testimonials</a></li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="#blog">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="#contact">Contact</a></li>
+                    <ul class="navbar-nav ms-auto text-center">
+                        <li class="nav-item"><a class="nav-link px-3" href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="#testimonials">Testimonials</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="#blog">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-      <!-- Hero Section Slider -->
-<div id="heroSlider" class="carousel slide" data-bs-ride="carousel">
-    <!-- Carousel Indicators -->
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
+        <!-- Hero Section with responsive classes -->
+        <div id="heroSlider" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="2"></button>
+            </div>
 
-    <!-- Carousel Items -->
-    <div class="carousel-inner">
-        <!-- Slide 1 -->
-        <div class="carousel-item active">
-            <div class="d-flex align-items-center justify-content-center vh-100 bg-dark bg-opacity-50 text-white"
-                style="background: url('https://images.unsplash.com/photo-1551076805-e1869033e561') center/cover;">
-                <div class="text-center">
-                    <h1 class="display-4 fw-bold">Leading Healthcare Innovation</h1>
-                    <p class="lead">Providing world-class medical care with cutting-edge technology and compassionate service.</p>
-                    <a href="#contact" class="btn btn-primary btn-lg rounded-pill">Book Appointment</a>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="d-flex align-items-center justify-content-center vh-100 bg-dark bg-opacity-50 text-white"
+                        style="background: url('https://images.unsplash.com/photo-1551076805-e1869033e561') center/cover no-repeat;">
+                        <div class="container text-center px-4">
+                            <h1 class="display-4 fw-bold mb-4">Leading Healthcare Innovation</h1>
+                            <p class="lead mb-4">Providing world-class medical care with cutting-edge technology.</p>
+                            <a href="#contact" class="btn btn-primary btn-lg rounded-pill px-4 py-2">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="d-flex align-items-center justify-content-center vh-100 bg-dark bg-opacity-50 text-white"
+                        style="background: url('https://images.unsplash.com/photo-1538108149393-fbbd81895907') center/cover no-repeat;">
+                        <div class="container text-center px-4">
+                            <h1 class="display-4 fw-bold mb-4">Expert Medical Team</h1>
+                            <p class="lead mb-4">Our dedicated professionals are committed to your health.</p>
+                            <a href="#services" class="btn btn-primary btn-lg rounded-pill px-4 py-2">Our Services</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="d-flex align-items-center justify-content-center vh-100 bg-dark bg-opacity-50 text-white"
+                        style="background: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d') center/cover no-repeat;">
+                        <div class="container text-center px-4">
+                            <h1 class="display-4 fw-bold mb-4">State-of-the-Art Facilities</h1>
+                            <p class="lead mb-4">Experience healthcare excellence in our modern facilities.</p>
+                            <a href="#about" class="btn btn-primary btn-lg rounded-pill px-4 py-2">Learn More</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroSlider" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
-
-        <!-- Slide 2 -->
-        <div class="carousel-item">
-            <div class="d-flex align-items-center justify-content-center vh-100 bg-dark bg-opacity-50 text-white"
-                style="background: url('https://images.unsplash.com/photo-1538108149393-fbbd81895907') center/cover;">
-                <div class="text-center">
-                    <h1 class="display-4 fw-bold">Expert Medical Team</h1>
-                    <p class="lead">Our dedicated professionals are committed to your health and well-being.</p>
-                    <a href="#services" class="btn btn-primary btn-lg rounded-pill">Our Services</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-item">
-            <div class="d-flex align-items-center justify-content-center vh-100 bg-dark bg-opacity-50 text-white"
-                style="background: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d') center/cover;">
-                <div class="text-center">
-                    <h1 class="display-4 fw-bold">State-of-the-Art Facilities</h1>
-                    <p class="lead">Experience healthcare excellence in our modern medical facilities.</p>
-                    <a href="#about" class="btn btn-primary btn-lg rounded-pill">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Carousel Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroSlider" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-
-
-
 
 
         <!-- About Section -->
