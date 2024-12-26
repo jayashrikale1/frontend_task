@@ -1,861 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Healthcare Solutions</title>
-    <!-- External libraries -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <style>
-        :root {
-            --primary: #0066cc;
-            --secondary: #4a90e2;
-            --accent: #00bcd4;
-            --light: #f5f9ff;
-            --dark: #333;
-            --white: #ffffff;
-            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        /* Shared Styles */
-        .section-padding {
-            padding: 6rem 2rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 30px;
-            background: var(--gradient);
-            color: var(--white);
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
-        }
-
-        /* Header Styles */
-        header {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient);
-            transition: width 0.3s;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                       url('/api/placeholder/1920/1080');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-            padding-top: 80px;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            animation: fadeInDown 1s;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s;
-        }
-
-        /* About Section */
-        .about {
-            background: var(--light);
-        }
-
-        .about-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-image {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-        }
-
-        .about-image:hover {
-            transform: rotateY(10deg);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Services Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient);
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 0;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .service-card:hover::before {
-            opacity: 0.1;
-        }
-
-        .service-card i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        /* Testimonial Section */
-        .testimonials {
-            background: var(--light);
-        }
-
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .testimonial-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .testimonial {
-            flex: 0 0 100%;
-            padding: 2rem;
-            text-align: center;
-            background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin: 1rem;
-        }
-
-        .testimonial img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            border: 5px solid var(--light);
-        }
-
-        .testimonial-arrows {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .testimonial-arrow {
-            background: var(--primary);
-            color: var(--white);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .testimonial-arrow:hover {
-            background: var(--accent);
-        }
-
-        /* Blog Section */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .blog-card {
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .blog-image {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .blog-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .blog-card:hover .blog-image img {
-            transform: scale(1.1);
-        }
-
-        .blog-content {
-            padding: 2rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: var(--gradient);
-            color: var(--white);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .contact-form {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            margin-top: 0.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: var(--white);
-            padding: 4rem 2rem 2rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-links h3 {
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-links a {
-            color: var(--white);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            transition: background 0.3s;
-        }
-
-        .social-links a:hover {
-            background: var(--accent);
-        }
-
-        .copyright {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .about-container {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                flex-direction: column;
-                padding: 1rem;
-                text-align: center;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            }
-
-            nav ul.active {
-                display: flex;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-        }
-    </style>
-</head>
-
-
-<body>
-    <header>
-        <div class="header-container">
-            <a href="#" class="logo">
-                <i class="fas fa-heartbeat"></i>
-                <span>HealthCare</span>
-            </a>
-            <div class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Leading Healthcare Innovation</h1>
-            <p>Providing world-class medical care with cutting-edge technology and compassionate service.</p>
-            <a href="#contact" class="btn">Book Appointment</a>
-        </div>
-    </section>
-    <section id="about" class="about section-padding">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Us</h2>
-                <p>Leading the way in modern healthcare solutions</p>
-            </div>
-            <div class="about-container">
-                <div class="about-content">
-                    <h3>Excellence in Healthcare</h3>
-                    <p>With over two decades of experience, we've been at the forefront of medical innovation, providing cutting-edge solutions and compassionate care to our patients.</p>
-                    <ul>
-                        <li>✓ State-of-the-art facilities</li>
-                        <li>✓ Expert medical professionals</li>
-                        <li>✓ Patient-centered approach</li>
-                        <li>✓ Advanced medical technology</li>
-                    </ul>
-                    <a href="#services" class="btn">Our Services</a>
-                </div>
-                <div class="about-image">
-                    <img src="/api/placeholder/600/400" alt="Modern Healthcare Facility">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="services section-padding">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Services</h2>
-                <p>Comprehensive healthcare solutions for your needs</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-user-md"></i>
-                    <h3>Expert Consultation</h3>
-                    <p>Professional medical consultation with our experienced doctors.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-heartbeat"></i>
-                    <h3>Heart Care</h3>
-                    <p>Comprehensive cardiac care and treatment services.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-brain"></i>
-                    <h3>Neurology</h3>
-                    <p>Advanced neurological treatment and care.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-tooth"></i>
-                    <h3>Dental Care</h3>
-                    <p>Complete dental services for all ages.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-procedures"></i>
-                    <h3>Emergency Care</h3>
-                    <p>24/7 emergency medical services.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-stethoscope"></i>
-                    <h3>General Health</h3>
-                    <p>Regular health check-ups and preventive care.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="testimonials" class="testimonials section-padding">
-        <div class="container">
-            <div class="section-title">
-                <h2>Patient Testimonials</h2>
-                <p>What our patients say about us</p>
-            </div>
-            <div class="testimonial-slider">
-                <div class="testimonial-track">
-                    <div class="testimonial">
-                        <img src="/api/placeholder/100/100" alt="Patient 1">
-                        <h3>John Smith</h3>
-                        <p>"Outstanding medical care and professional staff. The doctors are highly skilled and caring."</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="testimonial">
-                        <img src="/api/placeholder/100/100" alt="Patient 2">
-                        <h3>Sarah Johnson</h3>
-                        <p>"The best healthcare experience I've ever had. Modern facilities and excellent service."</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="testimonial">
-                        <img src="/api/placeholder/100/100" alt="Patient 3">
-                        <h3>Michael Brown</h3>
-                        <p>"Incredible attention to detail and patient care. Highly recommended!"</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-arrows">
-                    <div class="testimonial-arrow prev">
-                        <i class="fas fa-chevron-left"></i>
-                    </div>
-                    <div class="testimonial-arrow next">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="blog" class="blog section-padding">
-        <div class="container">
-            <div class="section-title">
-                <h2>Latest News</h2>
-                <p>Stay updated with healthcare insights</p>
-            </div>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <img src="/api/placeholder/400/300" alt="Blog 1">
-                    </div>
-                    <div class="blog-content">
-                        <h3>Healthcare Innovation</h3>
-                        <p>Exploring the latest advancements in medical technology.</p>
-                        <a href="#" class="btn">Read More</a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <img src="/api/placeholder/400/300" alt="Blog 2">
-                    </div>
-                    <div class="blog-content">
-                        <h3>Preventive Care</h3>
-                        <p>Tips for maintaining good health and preventing illness.</p>
-                        <a href="#" class="btn">Read More</a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <img src="/api/placeholder/400/300" alt="Blog 3">
-                    </div>
-                    <div class="blog-content">
-                        <h3>Mental Health</h3>
-                        <p>Understanding the importance of mental wellness.</p>
-                        <a href="#" class="btn">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact section-padding">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Us</h2>
-                <p>Get in touch with our medical experts</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Our Location</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Healthcare Street, Medical District</p>
-                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
-                    <p><i class="fas fa-envelope"></i> info@healthcare.com</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" placeholder="Your Phone">
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Your Message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="#">Emergency Care</a></li>
-                        <li><a href="#">Heart Care</a></li>
-                        <li><a href="#">Dental Care</a></li>
-                        <li><a href="#">General Health</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h3>Working Hours</h3>
-                    <ul>
-                        <li>Monday - Friday: 9:00 - 18:00</li>
-                        <li>Saturday: 9:00 - 16:00</li>
-                        <li>Sunday: Emergency Only</li>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Healthcare Solutions</title>
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+            rel="stylesheet">
+        <!-- Font Awesome -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet">
+        <!-- AOS Animation -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+            rel="stylesheet">
+
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!-- Navbar -->
+        <nav
+            class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+            <div class="container">
+                <!-- Brand and Icon -->
+                <a class="navbar-brand text-primary d-flex align-items-center"
+                    href="#">
+                    <i class="fas fa-heartbeat fs-3 me-2"></i>
+                    <span class="fw-bold">HealthCare</span>
+                </a>
+
+                <!-- Toggle Button -->
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar Links -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link"
+                                href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="#testimonials">Testimonials</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="#blog">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="#contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2024 Healthcare Solutions. All rights reserved.</p>
+        </nav>
+
+      <!-- Hero Section Slider -->
+<div id="heroSlider" class="carousel slide" data-bs-ride="carousel">
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <!-- Carousel Items -->
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <div class="d-flex align-items-center justify-content-center vh-100 bg-dark bg-opacity-50 text-white"
+                style="background: url('https://images.unsplash.com/photo-1551076805-e1869033e561') center/cover;">
+                <div class="text-center">
+                    <h1 class="display-4 fw-bold">Leading Healthcare Innovation</h1>
+                    <p class="lead">Providing world-class medical care with cutting-edge technology and compassionate service.</p>
+                    <a href="#contact" class="btn btn-primary btn-lg rounded-pill">Book Appointment</a>
+                </div>
             </div>
         </div>
-    </footer>
 
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const nav = document.querySelector('nav ul');
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <div class="d-flex align-items-center justify-content-center vh-100 bg-dark bg-opacity-50 text-white"
+                style="background: url('https://images.unsplash.com/photo-1538108149393-fbbd81895907') center/cover;">
+                <div class="text-center">
+                    <h1 class="display-4 fw-bold">Expert Medical Team</h1>
+                    <p class="lead">Our dedicated professionals are committed to your health and well-being.</p>
+                    <a href="#services" class="btn btn-primary btn-lg rounded-pill">Our Services</a>
+                </div>
+            </div>
+        </div>
 
-        mobileMenuBtn.addEventListener('click', () => {
-            nav.classList.toggle('active');
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+            <div class="d-flex align-items-center justify-content-center vh-100 bg-dark bg-opacity-50 text-white"
+                style="background: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d') center/cover;">
+                <div class="text-center">
+                    <h1 class="display-4 fw-bold">State-of-the-Art Facilities</h1>
+                    <p class="lead">Experience healthcare excellence in our modern medical facilities.</p>
+                    <a href="#about" class="btn btn-primary btn-lg rounded-pill">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroSlider" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+
+
+
+        <!-- About Section -->
+        <section id="about" class="py-5 bg-light">
+            <div class="container py-5">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 text-primary">About Us</h2>
+                    <p class="lead">Leading the way in modern healthcare
+                        solutions</p>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                        <h3 class="mb-4">Excellence in Healthcare</h3>
+                        <p class="mb-4">With over two decades of experience,
+                            we've been at the forefront of medical innovation,
+                            providing cutting-edge solutions and compassionate
+                            care to our patients.</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i
+                                    class="fas fa-check-circle text-primary me-2"></i>State-of-the-art
+                                facilities</li>
+                            <li class="mb-2"><i
+                                    class="fas fa-check-circle text-primary me-2"></i>Expert
+                                medical professionals</li>
+                            <li class="mb-2"><i
+                                    class="fas fa-check-circle text-primary me-2"></i>Patient-centered
+                                approach</li>
+                            <li class="mb-2"><i
+                                    class="fas fa-check-circle text-primary me-2"></i>Advanced
+                                medical technology</li>
+                        </ul>
+                        <a href="#services"
+                            class="btn btn-primary rounded-pill px-4">Our
+                            Services</a>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <img
+                            src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d"
+                            class="img-fluid rounded-4 shadow-lg"
+                            alt="Modern Healthcare Facility">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Section -->
+        <section id="products" class="py-5 bg-light">
+            <div class="container py-5">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 text-primary">Featured Products</h2>
+                    <p class="lead">Quality healthcare solutions for your
+                        needs</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="fade-up">
+                        <div class="card border-0 shadow-sm h-100">
+                            <img
+                                src="https://images.unsplash.com/photo-1576671081837-49000212a370"
+                                class="card-img-top" alt="Medical Equipment">
+                            <div class="card-body p-4">
+                                <h4 class="card-title">Advanced Diagnostic
+                                    Kit</h4>
+                                <p class="card-text text-muted">Complete home
+                                    health monitoring system with smart
+                                    features.</p>
+                                <div
+                                    class="d-flex justify-content-between align-items-center">
+                                    <span
+                                        class="h5 text-primary mb-0">$299.99</span>
+                                    <a href="#"
+                                        class="btn btn-primary rounded-pill">Learn
+                                        More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <div class="card border-0 shadow-sm h-100">
+                            <img
+                                src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b"
+                                class="card-img-top" alt="Wellness Package">
+                            <div class="card-body p-4">
+                                <h4 class="card-title">Wellness Package</h4>
+                                <p class="card-text text-muted">Comprehensive
+                                    health screening and consultation
+                                    package.</p>
+                                <div
+                                    class="d-flex justify-content-between align-items-center">
+                                    <span
+                                        class="h5 text-primary mb-0">$499.99</span>
+                                    <a href="#"
+                                        class="btn btn-primary rounded-pill">Book
+                                        Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <div class="card border-0 shadow-sm h-100">
+                            <img
+                                src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb"
+                                class="card-img-top" alt="Telehealth Service">
+                            <div class="card-body p-4">
+                                <h4 class="card-title">Telehealth Service</h4>
+                                <p class="card-text text-muted">24/7 access to
+                                    healthcare professionals from your home.</p>
+                                <div
+                                    class="d-flex justify-content-between align-items-center">
+                                    <span
+                                        class="h5 text-primary mb-0">$79.99/mo</span>
+                                    <a href="#"
+                                        class="btn btn-primary rounded-pill">Subscribe</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-5">
+                    <a href="#" class="btn btn-lg btn-primary rounded-pill">View
+                        All Products</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-5">
+            <div class="container py-5">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 text-primary">Our Services</h2>
+                    <p class="lead">Comprehensive healthcare solutions for your
+                        needs</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                        <div class="card h-100 border-0 shadow-sm hover-shadow">
+                            <div class="card-body text-center p-4">
+                                <i
+                                    class="fas fa-user-md text-primary fa-3x mb-3"></i>
+                                <h4 class="mb-3">Expert Consultation</h4>
+                                <p class="text-muted">Professional medical
+                                    consultation with our experienced
+                                    doctors.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <div class="card h-100 border-0 shadow-sm hover-shadow">
+                            <div class="card-body text-center p-4">
+                                <i
+                                    class="fas fa-heartbeat text-primary fa-3x mb-3"></i>
+                                <h4 class="mb-3">Heart Care</h4>
+                                <p class="text-muted">Comprehensive cardiac care
+                                    and treatment services.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <div class="card h-100 border-0 shadow-sm hover-shadow">
+                            <div class="card-body text-center p-4">
+                                <i
+                                    class="fas fa-brain text-primary fa-3x mb-3"></i>
+                                <h4 class="mb-3">Neurology</h4>
+                                <p class="text-muted">Advanced neurological
+                                    treatment and care.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                        <div class="card h-100 border-0 shadow-sm hover-shadow">
+                            <div class="card-body text-center p-4">
+                                <i
+                                    class="fas fa-tooth text-primary fa-3x mb-3"></i>
+                                <h4 class="mb-3">Dental Care</h4>
+                                <p class="text-muted">Complete dental services
+                                    for all ages.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <div class="card h-100 border-0 shadow-sm hover-shadow">
+                            <div class="card-body text-center p-4">
+                                <i
+                                    class="fas fa-procedures text-primary fa-3x mb-3"></i>
+                                <h4 class="mb-3">Emergency Care</h4>
+                                <p class="text-muted">24/7 emergency medical
+                                    services.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <div class="card h-100 border-0 shadow-sm hover-shadow">
+                            <div class="card-body text-center p-4">
+                                <i
+                                    class="fas fa-stethoscope text-primary fa-3x mb-3"></i>
+                                <h4 class="mb-3">General Health</h4>
+                                <p class="text-muted">Regular health check-ups
+                                    and preventive care.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-5 bg-light">
+            <div class="container py-5">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 text-primary">Patient Testimonials</h2>
+                    <p class="lead">What our patients say about us</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div id="testimonialCarousel" class="carousel slide"
+                            data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="card border-0 shadow-sm p-4">
+                                        <div class="text-center mb-4">
+                                            <img
+                                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+                                                class="rounded-circle shadow-sm"
+                                                width="100" height="100"
+                                                alt="Patient 1">
+                                            <h4 class="mt-3">John Smith</h4>
+                                            <div class="text-warning mb-3">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p
+                                                class="text-muted">"Outstanding medical care and professional staff. The doctors are highly skilled and caring."</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="card border-0 shadow-sm p-4">
+                                        <div class="text-center mb-4">
+                                            <img
+                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+                                                class="rounded-circle shadow-sm"
+                                                width="100" height="100"
+                                                alt="Patient 2">
+                                            <h4 class="mt-3">Sarah Johnson</h4>
+                                            <div class="text-warning mb-3">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p
+                                                class="text-muted">"The best healthcare experience I've ever had. Modern facilities and excellent service."</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="card border-0 shadow-sm p-4">
+                                        <div class="text-center mb-4">
+                                            <img
+                                                src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6"
+                                                class="rounded-circle shadow-sm"
+                                                width="100" height="100"
+                                                alt="Patient 3">
+                                            <h4 class="mt-3">Michael Brown</h4>
+                                            <div class="text-warning mb-3">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p
+                                                class="text-muted">"Incredible attention to detail and patient care. Highly recommended!"</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#testimonialCarousel"
+                                data-bs-slide="prev">
+                                <span
+                                    class="carousel-control-prev-icon bg-primary rounded-circle"
+                                    aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#testimonialCarousel"
+                                data-bs-slide="next">
+                                <span
+                                    class="carousel-control-next-icon bg-primary rounded-circle"
+                                    aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="py-5">
+            <div class="container py-5">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 text-primary">Latest Blogs</h2>
+                    <p class="lead">Stay updated with healthcare insights</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="fade-up">
+                        <div class="card border-0 shadow-sm h-100">
+                            <img
+                                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d"
+                                class="card-img-top" alt="Blog 1">
+                            <div class="card-body p-4">
+                                <h4 class="card-title">Healthcare
+                                    Innovation</h4>
+                                <p class="card-text text-muted">Exploring the
+                                    latest advancements in medical
+                                    technology.</p>
+                                <a href="#"
+                                    class="btn btn-outline-primary rounded-pill">Read
+                                    More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <div class="card border-0 shadow-sm h-100">
+                            <img
+                                src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528"
+                                class="card-img-top" alt="Blog 2">
+                            <div class="card-body p-4">
+                                <h4 class="card-title">Preventive Care</h4>
+                                <p class="card-text text-muted">Tips for
+                                    maintaining good health and preventing
+                                    illness.</p>
+                                <a href="#"
+                                    class="btn btn-outline-primary rounded-pill">Read
+                                    More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <div class="card border-0 shadow-sm h-100">
+                            <img
+                                src="https://images.unsplash.com/photo-1498837167922-ddd27525d352"
+                                class="card-img-top" alt="Blog 3">
+                            <div class="card-body p-4">
+                                <h4 class="card-title">Mental Health</h4>
+                                <p class="card-text text-muted">Understanding
+                                    the importance of mental wellness.</p>
+                                <a href="#"
+                                    class="btn btn-outline-primary rounded-pill">Read
+                                    More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-5 bg-primary text-white">
+            <div class="container py-5">
+                <div class="text-center mb-5">
+                    <h2 class="display-5">Contact Us</h2>
+                    <p class="lead">Get in touch with our medical experts</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-5" data-aos="fade-right">
+                        <div class="mb-4">
+                            <h3>Our Location</h3>
+                            <p class="mb-4">Reach out to us for any medical
+                                assistance or inquiries.</p>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <i
+                                class="fas fa-map-marker-alt fa-fw fa-2x me-3"></i>
+                            <div>
+                                <h5>Address</h5>
+                                <p>123 Healthcare Street, Medical District</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <i class="fas fa-phone fa-fw fa-2x me-3"></i>
+                            <div>
+                                <h5>Phone</h5>
+                                <p>(555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <i class="fas fa-envelope fa-fw fa-2x me-3"></i>
+                            <div>
+                                <h5>Email</h5>
+                                <p>info@healthcare.com</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h5>Follow Us</h5>
+                            <div class="d-flex gap-3 mt-3">
+                                <a href="#" class="text-white"><i
+                                        class="fab fa-facebook-f fa-2x"></i></a>
+                                <a href="#" class="text-white"><i
+                                        class="fab fa-twitter fa-2x"></i></a>
+                                <a href="#" class="text-white"><i
+                                        class="fab fa-linkedin-in fa-2x"></i></a>
+                                <a href="#" class="text-white"><i
+                                        class="fab fa-instagram fa-2x"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7" data-aos="fade-left">
+                        <div class="card border-0 shadow-lg">
+                            <div class="card-body p-5">
+                                <h4 class="text-dark mb-4">Send us a
+                                    Message</h4>
+                                <form>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="text"
+                                                    class="form-control"
+                                                    id="name"
+                                                    placeholder="Your Name"
+                                                    required>
+                                                <label for="name"
+                                                    class="text-muted">Your
+                                                    Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="email"
+                                                    class="form-control"
+                                                    id="email"
+                                                    placeholder="Your Email"
+                                                    required>
+                                                <label for="email"
+                                                    class="text-muted">Your
+                                                    Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="tel"
+                                                    class="form-control"
+                                                    id="phone"
+                                                    placeholder="Your Phone">
+                                                <label for="phone"
+                                                    class="text-muted">Your
+                                                    Phone</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <textarea class="form-control"
+                                                    placeholder="Your Message"
+                                                    id="message"
+                                                    style="height: 150px"
+                                                    required></textarea>
+                                                <label for="message"
+                                                    class="text-muted">Your
+                                                    Message</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit"
+                                                class="btn btn-primary btn-lg rounded-pill px-5">Send
+                                                Message</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white py-5">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="mb-4">Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#about"
+                                    class="text-white-50 text-decoration-none">About
+                                    Us</a></li>
+                            <li class="mb-2"><a href="#services"
+                                    class="text-white-50 text-decoration-none">Services</a></li>
+                            <li class="mb-2"><a href="#testimonials"
+                                    class="text-white-50 text-decoration-none">Testimonials</a></li>
+                            <li class="mb-2"><a href="#blog"
+                                    class="text-white-50 text-decoration-none">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="mb-4">Services</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#"
+                                    class="text-white-50 text-decoration-none">Emergency
+                                    Care</a></li>
+                            <li class="mb-2"><a href="#"
+                                    class="text-white-50 text-decoration-none">Heart
+                                    Care</a></li>
+                            <li class="mb-2"><a href="#"
+                                    class="text-white-50 text-decoration-none">Dental
+                                    Care</a></li>
+                            <li class="mb-2"><a href="#"
+                                    class="text-white-50 text-decoration-none">General
+                                    Health</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="mb-4">Working Hours</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2 text-white-50">Monday - Friday: 9:00
+                                - 18:00</li>
+                            <li class="mb-2 text-white-50">Saturday: 9:00 -
+                                16:00</li>
+                            <li class="mb-2 text-white-50">Sunday: Emergency
+                                Only</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="mb-4">Newsletter</h5>
+                        <p class="text-white-50">Subscribe to our newsletter for
+                            health tips and updates.</p>
+                        <form class="mt-3">
+                            <div class="input-group">
+                                <input type="email" class="form-control"
+                                    placeholder="Your Email">
+                                <button class="btn btn-primary"
+                                    type="submit">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="text-center border-top border-secondary mt-5 pt-4">
+                    <p class="mb-0">&copy; 2024 Healthcare Solutions. All rights
+                        reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <!-- Bootstrap JS Bundle -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
         });
 
-        // Testimonial Slider
-        const track = document.querySelector('.testimonial-track');
-        const slides = Array.from(track.children);
-        const nextButton = document.querySelector('.next');
-        const prevButton = document.querySelector('.prev');
-        let currentIndex = 0;
-
-        // Set initial position
-        slides.forEach((slide, index) => {
-            slide.style.left = index * 100 + '%';
-        });
-
-        // Next button click handler
-        nextButton.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateSlider();
-        });
-
-        // Previous button click handler
-        prevButton.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            updateSlider();
-        });
-
-        function updateSlider() {
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-
-        // Auto slide every 5 seconds
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateSlider();
-        }, 5000);
-
-        // GSAP Animations
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Animate service cards
-        gsap.utils.toArray('.service-card').forEach(card => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
-            });
-        });
-
-        // Animate blog cards
-        gsap.utils.toArray('.blog-card').forEach(card => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
+        // Add smooth scrolling to all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     </script>
-</body>
-
-
+    </body>
 </html>
